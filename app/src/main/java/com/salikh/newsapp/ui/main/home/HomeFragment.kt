@@ -1,5 +1,6 @@
 package com.salikh.newsapp.ui.main.home
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.salikh.newsapp.core.helpers.SendDataToVIew
 import com.salikh.newsapp.core.models.response.Article
 import com.salikh.newsapp.core.models.response.EverythingResponse
 import com.salikh.newsapp.databinding.FragmetHomeBinding
+import com.salikh.newsapp.ui.post.PostActivity
 
 class HomeFragment : BaseFragment(), HomeMVP.View, SendDataToVIew {
 
@@ -69,11 +71,17 @@ class HomeFragment : BaseFragment(), HomeMVP.View, SendDataToVIew {
 
     }
 
-    override fun sendData(data: Article?) {
+    override fun sendData(data: Article) {
 
-/*
-        startActivity(Intent(context, MainActivity::class.java))
-*/
+
+        val intent = Intent(context, PostActivity::class.java)
+        intent.putExtra("title", data.title)
+        intent.putExtra("discription", data.description)
+        intent.putExtra("auth", data.author)
+        intent.putExtra("date", data.publishedAt)
+        intent.putExtra("date", data.urlToImage)
+
+        startActivity(intent)
 
     }
 
